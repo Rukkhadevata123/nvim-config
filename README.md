@@ -58,7 +58,7 @@ tar -xzvf jdtls.tar.gz
 rm jdtls.tar.gz
 ```
 
-Step 6: Install Other Language Servers
+### Step 6: Install Other Language Servers
 
 Make sure to install language servers for the languages you are working with. If you are using `archlinux` , then using `pacman`:
 
