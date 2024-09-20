@@ -63,7 +63,7 @@ Step 6: Install Other Language Servers
 Make sure to install language servers for the languages you are working with. If you are using `archlinux` , then using `pacman`:
 
 ```bash
-sudo pacman -S lua-language-server bash-language-server clang pyright gopls rustup
+sudo pacman -S lua-language-server bash-language-server clang pyright gopls rustup typescript-language-server rust-analyzer
 ```
 ### Step 7: Install Plugins and Sync Configuration
 
