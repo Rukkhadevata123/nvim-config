@@ -67,7 +67,7 @@ sudo pacman -S lua-language-server bash-language-server clang pyright gopls rust
 ```
 ### Step 7: Install Tokyonight Theme
 
-You should install the theme before launch `neovim` , or `:PackerSync` can't be executed.
+You should install the theme before launching `neovim` , or `:PackerSync` can't be executed.
 
 ```bash
 git clone https://github.com/folke/tokyonight.nvim \
@@ -80,5 +80,23 @@ Once everything is set up, open Neovim and run the following command to install 
 
 ```bash
 :PackerSync
+```
+
+## Complete Shell Script
+
+```bash
+mv ~/.config/nvim ~/.config/nvim_backup
+git clone https://github.com/Rukkhadevata123/nvim-config ~/.config/nvim
+git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+git clone https://github.com/github/copilot.vim.git ~/.config/nvim/pack/github/start/copilot.vim
+mkdir -p ~/.local/share/nvim/lsp_servers/jdtls/plugins/
+wget -O ~/.local/share/nvim/lsp_servers/jdtls/jdtls.tar.gz https://download.eclipse.org/jdtls/snapshots/jdt-language-server-latest.tar.gz
+cd ~/.local/share/nvim/lsp_servers/jdtls
+tar -xzvf jdtls.tar.gz
+rm jdtls.tar.gz
+cd
+sudo pacman -S lua-language-server bash-language-server clang pyright gopls rustup typescript-language-server rust-analyzer flake8 eslint
+git clone https://github.com/folke/tokyonight.nvim ~/.local/share/nvim/site/pack/packer/start/tokyonight.nvim
+nvim
 ```
 
