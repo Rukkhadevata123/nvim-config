@@ -66,6 +66,12 @@ Make sure to install language servers for the languages you are working with. Fo
 ```bash
 sudo pacman -S lua-language-server bash-language-server clang pyright gopls rustup typescript-language-server rust-analyzer flake8 eslint
 ```
+Alternatively you may use `npm` to install language servers: 
+
+```bash
+npm install -g pyright bash-language-server typescript-language-server
+```
+
 ### Step 7: Install Tokyonight Theme
 
 You should install the theme before launching `neovim` , or `:PackerSync` can't be executed.
