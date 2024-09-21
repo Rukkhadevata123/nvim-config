@@ -1,44 +1,43 @@
-require('Comment').setup(
-{
-    ---Add a space b/w comment and the line
+require('Comment').setup({
+    ---在注释和行之间添加空格
     padding = true,
-    ---Whether the cursor should stay at its position
+    ---光标是否应保持在其位置
     sticky = true,
-    ---Lines to be ignored while (un)comment
+    ---在（取消）注释时忽略的行
     ignore = nil,
-    ---LHS of toggle mappings in NORMAL mode
+    ---NORMAL 模式下的切换映射
     toggler = {
-        ---Line-comment toggle keymap
+        ---行注释切换键映射
         line = 'gcc',
-        ---Block-comment toggle keymap
+        ---块注释切换键映射
         block = 'gbc',
     },
-    ---LHS of operator-pending mappings in NORMAL and VISUAL mode
+    ---NORMAL 和 VISUAL 模式下的操作待定映射
     opleader = {
-        ---Line-comment keymap
+        ---行注释键映射
         line = 'gc',
-        ---Block-comment keymap
+        ---块注释键映射
         block = 'gb',
     },
-    ---LHS of extra mappings
+    ---额外的键映射
     extra = {
-        ---Add comment on the line above
+        ---在上方添加注释
         above = 'gcO',
-        ---Add comment on the line below
+        ---在下方添加注释
         below = 'gco',
-        ---Add comment at the end of line
+        ---在行尾添加注释
         eol = 'gcA',
     },
-    ---Enable keybindings
-    ---NOTE: If given `false` then the plugin won't create any mappings
+    ---启用键绑定
+    ---注意：如果设置为 `false`，插件将不会创建任何映射
     mappings = {
-        ---Operator-pending mapping; `gcc` `gbc` `gc[count]{motion}` `gb[count]{motion}`
+        ---操作待定映射；`gcc` `gbc` `gc[count]{motion}` `gb[count]{motion}`
         basic = true,
-        ---Extra mapping; `gco`, `gcO`, `gcA`
+        ---额外映射；`gco`, `gcO`, `gcA`
         extra = true,
     },
-    ---Function to call before (un)comment
+    ---在（取消）注释之前调用的函数
     pre_hook = nil,
-    ---Function to call after (un)comment
+    ---在（取消）注释之后调用的函数
     post_hook = nil,
 })

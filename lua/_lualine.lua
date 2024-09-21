@@ -10,4 +10,22 @@ require('lualine').setup({
     },
     always_divide_middle = true -- 总是将状态栏分成左右两部分
   },
+  sections = {
+    lualine_a = {'mode'},       -- 显示当前模式
+    lualine_b = {'branch', 'diff', 'diagnostics'}, -- 显示 Git 分支、差异和诊断信息
+    lualine_c = {'filename'},   -- 显示文件名
+    lualine_x = {'encoding', 'fileformat', 'filetype'}, -- 显示文件编码、格式和类型
+    lualine_y = {'progress'},   -- 显示进度
+    lualine_z = {'location'}    -- 显示光标位置
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {'filename'},
+    lualine_x = {'location'},
+    lualine_y = {},
+    lualine_z = {}
+  },
+  tabline = {},                 -- 配置标签栏
+  extensions = {'fugitive'}     -- 启用扩展，如 fugitive
 })
