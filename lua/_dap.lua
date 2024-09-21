@@ -1,29 +1,57 @@
--- 配置 nvim-dap-python
-local dap = require('dap')
-local dap_python = require('dap-python')
-
-dap_python.setup('~/.virtualenvs/debugpy/bin/python')
-
--- 配置 nvim-dap-go
-local dap_go = require('dap-go')
-
-dap_go.setup()
-
--- 配置 nvim-dap-node
-dap.adapters.node2 = {
-  type = 'executable',
-  command = 'node',
-  args = {os.getenv('HOME') .. '/.vscode/extensions/ms-vscode.node-debug2-1.42.5/out/src/nodeDebug.js'},
+local dap = require("dap")
+dap.adapters.gdb = {
+  type = "executable",
+  command = "gdb",
+  args = { "--interpreter=dap", "--eval-command", "set print pretty on" }
 }
 
-dap.configurations.javascript = {
+dap.configurations.c = {
   {
-    type = 'node2',
-    request = 'launch',
-    program = '${file}',
-    cwd = vim.fn.getcwd(),
-    sourceMaps = true,
-    protocol = 'inspector',
-    console = 'integratedTerminal',
+    name = "Launch",
+    type = "gdb",
+    request = "launch",
+    program = function()
+      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+    end,
+    cwd = "${workspaceFolder}",
+    stopAtBeginningOfMainSubprogram = false,
+  },
+  {
+    name = "Select and attach to process",
+    type = "gdb",
+    request = "attach",
+    program = function()
+       return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+    end,
+    pid = function()
+       local name = vim.fn.input('Executable name (filter): ')
+       return require("dap.utils").pick_process({ filter = name })
+    end,
+    cwd = '${workspaceFolder}'
+  },
+  {
+    name = 'Attach to gdbserver :1234',
+    type = 'gdb',
+    request = 'attach',
+    target = 'localhost:1234',
+    program = function()
+       return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+    end,
+    cwd = '${workspaceFolder}'
   },
 }
+
+-- 配置 nvim-dap-ui
+require("dapui").setup()
+
+-- 在调试会话开始和结束时自动打开/关闭 UI
+dap.listeners.after.event_initialized["dapui_config"] = function()
+  require("dapui").open()
+end
+dap.listeners.before.event_terminated["dapui_config"] = function()
+  require("dapui").close()
+end
+dap.listeners.before.event_exited["dapui_config"] = function()
+  require("dapui").close()
+end
+

@@ -3,7 +3,9 @@ local nvim_lsp = require('lspconfig')
 
 -- 通用 on_attach 函数
 local on_attach = function(client, bufnr)
-  local bufopts = { noremap=true, silent=true, buffer=bufnr }
+  local bufopts = { noremap = true, silent = true, buffer = bufnr }
+
+  -- LSP 相关的快捷键
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
@@ -12,43 +14,43 @@ local on_attach = function(client, bufnr)
 end
 
 -- 配置 clangd
-nvim_lsp.clangd.setup{
+nvim_lsp.clangd.setup {
   on_attach = on_attach,
 }
 
 -- 配置 pyright
-nvim_lsp.pyright.setup{
+nvim_lsp.pyright.setup {
   on_attach = on_attach,
 }
 
 -- 配置 gopls
-nvim_lsp.gopls.setup{
+nvim_lsp.gopls.setup {
   on_attach = on_attach,
 }
 
 -- 配置 rust-analyzer
-require('rust-tools').setup({
+require('rust-tools').setup {
   server = {
     on_attach = on_attach,
   },
-})
+}
 
--- 配置 ts_ls
-nvim_lsp.ts_ls.setup{
+-- 配置 TypeScript 语言服务器
+nvim_lsp.ts_ls.setup {
   on_attach = on_attach,
 }
 
--- 配置 bash-language-server
-nvim_lsp.bashls.setup{
+-- 配置 Bash 语言服务器
+nvim_lsp.bashls.setup {
   on_attach = on_attach,
 }
 
--- 配置 lua_ls
-require'lspconfig'.lua_ls.setup {
+-- 配置 Lua 语言服务器
+nvim_lsp.lua_ls.setup {
   on_init = function(client)
     if client.workspace_folders then
       local path = client.workspace_folders[1].name
-      if vim.loop.fs_stat(path..'/.luarc.json') or vim.loop.fs_stat(path..'/.luarc.jsonc') then
+      if vim.loop.fs_stat(path .. '/.luarc.json') or vim.loop.fs_stat(path .. '/.luarc.jsonc') then
         return
       end
     end

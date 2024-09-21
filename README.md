@@ -60,12 +60,21 @@ rm jdtls.tar.gz
 
 ### Step 6: Install Other Language Servers
 
-Make sure to install language servers for the languages you are working with. If you are using `archlinux` , then using `pacman`:
+Make sure to install language servers for the languages you are working with. For example: 
 
 ```bash
-sudo pacman -S lua-language-server bash-language-server clang pyright gopls rustup typescript-language-server rust-analyzer
+sudo pacman -S lua-language-server bash-language-server clang pyright gopls rustup typescript-language-server rust-analyzer flake8 eslint
 ```
-### Step 7: Install Plugins and Sync Configuration
+### Step 7: Install Tokyonight Theme
+
+You should install the theme before launch `neovim` , or `:PackerSync` can't be executed.
+
+```bash
+git clone https://github.com/folke/tokyonight.nvim \
+  ~/.local/share/nvim/site/pack/packer/start/tokyonight.nvim
+```
+
+### Step 8: Install Plugins and Sync Configuration
 
 Once everything is set up, open Neovim and run the following command to install all plugins:
 
