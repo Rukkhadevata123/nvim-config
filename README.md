@@ -9,6 +9,7 @@ Make sure you have the following tools installed:
 - Neovim (version 0.5+)
 - Git
 - wget (for Java LSP setup)
+- [Nerd Fonts](https://www.nerdfonts.com/) (for themes)
 
 ## Installation
 
