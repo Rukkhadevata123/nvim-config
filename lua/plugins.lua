@@ -10,7 +10,7 @@ require('packer').startup(function()
   use 'jose-elias-alvarez/null-ls.nvim' -- 代码格式化和诊断
   use 'nvim-lua/plenary.nvim' -- 一些 Lua 函数的库，其他插件的依赖
   use 'kyazdani42/nvim-tree.lua' -- 文件浏览器
-  use 'mfussenegger/nvim-dap' -- Neovim 的调试插件
+  -- use 'mfussenegger/nvim-dap' -- Neovim 的调试插件
   use 'mfussenegger/nvim-jdtls' -- Java LSP 客户端
   -- use 'mfussenegger/nvim-dap-python' -- Python 调试支持
   -- use 'leoluz/nvim-dap-go' -- Go 调试支持
@@ -21,8 +21,8 @@ require('packer').startup(function()
   use 'windwp/nvim-autopairs' -- 自动配对括号
   use 'akinsho/bufferline.nvim' -- 标签页管理
   use 'lewis6991/gitsigns.nvim' -- Git 状态提示
-  use 'rcarriga/nvim-dap-ui' -- DAP 调试 GUI
-  use 'nvim-neotest/nvim-nio' -- DAP GUI 依赖
+  -- use 'rcarriga/nvim-dap-ui' -- DAP 调试 GUI
+  -- use 'nvim-neotest/nvim-nio' -- DAP GUI 依赖
 
   -- Telescope: 模糊搜索插件
   use {

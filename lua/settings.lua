@@ -63,10 +63,3 @@ vim.cmd [[
   hi TabLine ctermbg=NONE ctermfg=NONE guibg=NONE
 ]]
 
--- 在退出时自动更新插件
-vim.cmd [[
-  augroup PackerSyncOnExit
-    autocmd!
-    autocmd VimLeavePre * lua require('packer').sync()
-  augroup END
-]]

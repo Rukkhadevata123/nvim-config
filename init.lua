@@ -22,9 +22,6 @@ require('nvim_tree')
 -- 快捷键绑定
 require('keymaps')
 
--- DAP 配置
-require('_dap')
-
 -- 状态栏
 require('_lualine')
 
