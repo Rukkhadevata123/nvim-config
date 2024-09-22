@@ -64,7 +64,7 @@ rm jdtls.tar.gz
 Make sure to install language servers for the languages you are working with. For example: 
 
 ```bash
-sudo pacman -S lua-language-server bash-language-server clang pyright gopls rustup typescript-language-server rust-analyzer flake8 eslint prettier --needed
+sudo pacman -S clang lua-language-server bash-language-server clang pyright gopls rustup typescript-language-server rust-analyzer flake8 eslint prettier --needed
 ```
 Alternatively you may use `npm` to install language servers: 
 
@@ -102,7 +102,7 @@ cd ~/.local/share/nvim/lsp_servers/jdtls
 tar -xzvf jdtls.tar.gz
 rm jdtls.tar.gz
 cd
-sudo pacman -S lua-language-server bash-language-server clang pyright gopls rustup typescript-language-server rust-analyzer flake8 eslint prettier --needed
+sudo pacman -S clang lua-language-server bash-language-server clang pyright gopls rustup typescript-language-server rust-analyzer flake8 eslint prettier --needed
 git clone https://github.com/folke/tokyonight.nvim ~/.local/share/nvim/site/pack/packer/start/tokyonight.nvim
 nvim
 ```
