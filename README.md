@@ -71,6 +71,7 @@ Alternatively you may use `npm` to install language servers:
 ```bash
 npm install -g pyright bash-language-server typescript-language-server
 ```
+> About Python formatter you can use [`black`](https://github.com/averms/black-nvim)
 
 ### Step 7: Install Tokyonight Theme
 
