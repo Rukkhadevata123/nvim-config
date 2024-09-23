@@ -71,7 +71,6 @@ Alternatively you may use `npm` to install language servers:
 ```bash
 npm install -g pyright bash-language-server typescript-language-server
 ```
-> About Python formatter you can use [`black`](https://github.com/averms/black-nvim)
 
 ### Step 7: Install Tokyonight Theme
 
@@ -82,7 +81,19 @@ git clone https://github.com/folke/tokyonight.nvim \
   ~/.local/share/nvim/site/pack/packer/start/tokyonight.nvim
 ```
 
-### Step 8: Install Plugins and Sync Configuration
+### Step 8: Install Python Formatter
+
+You need to install [`black`](https://github.com/averms/black-nvim) to format Python codes.
+
+```bash
+mkdir -p ~/.local/venv && cd ~/.local/venv
+python3 -m venv nvim
+cd nvim
+. ./bin/activate
+pip install pynvim black
+```
+
+### Step 9: Install Plugins and Sync Configuration
 
 Once everything is set up, open Neovim and run the following command to install all plugins:
 
@@ -102,6 +113,12 @@ wget -O ~/.local/share/nvim/lsp_servers/jdtls/jdtls.tar.gz https://download.ecli
 cd ~/.local/share/nvim/lsp_servers/jdtls
 tar -xzvf jdtls.tar.gz
 rm jdtls.tar.gz
+cd
+mkdir -p ~/.local/venv && cd ~/.local/venv
+python3 -m venv nvim
+cd nvim
+. ./bin/activate
+pip install pynvim black
 cd
 sudo pacman -S clang lua-language-server bash-language-server clang pyright gopls rustup typescript-language-server rust-analyzer flake8 eslint prettier --needed
 git clone https://github.com/folke/tokyonight.nvim ~/.local/share/nvim/site/pack/packer/start/tokyonight.nvim
