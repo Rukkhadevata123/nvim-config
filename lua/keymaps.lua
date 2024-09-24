@@ -59,7 +59,6 @@ keymap('n', '<Leader>lp', function() dap.set_breakpoint(nil, nil, vim.fn.input('
 keymap('n', '<Leader>dr', dap.repl.open, { noremap = true, silent = true })
 keymap('n', '<Leader>dh', function() require('dap.ui.widgets').hover() end, { noremap = true, silent = true })
 keymap('n', '<Leader>du', function() require('dapui').toggle() end, { noremap = true, silent = true })
-keymap('n', '<Leader>B', function() dap.set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, { noremap = true, silent = true })
 
 
 
