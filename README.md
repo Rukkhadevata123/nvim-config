@@ -1,10 +1,10 @@
 # My Neovim Configuration
 
-This repository contains my Neovim configuration, designed for various languages including C++, Python, Go, Rust, TypeScript, Bash, and Java (with LSP support). Below are the instructions to set it up.
+This repository contains my Neovim configuration for C++, Python, Go, Rust, TypeScript, Bash, and Java (with LSP support). Follow the instructions below to set it up.
 
 ## Prerequisites
 
-Make sure you have the following tools installed:
+Ensure you have the following installed:
 
 - Neovim (version 0.5+)
 - Git
@@ -15,7 +15,7 @@ Make sure you have the following tools installed:
 
 ### Step 1: Backup Existing Neovim Configuration
 
-Before proceeding, it is recommended to backup your existing Neovim configuration:
+Backup your current Neovim configuration:
 
 ```bash
 mv ~/.config/nvim ~/.config/nvim_backup
@@ -23,7 +23,7 @@ mv ~/.config/nvim ~/.config/nvim_backup
 
 ### Step 2: Clone This Repository
 
-Clone this repository directly into your Neovim configuration directory:
+Clone the repository into your Neovim configuration directory:
 
 ```bash
 git clone https://github.com/Rukkhadevata123/nvim-config ~/.config/nvim
@@ -31,7 +31,7 @@ git clone https://github.com/Rukkhadevata123/nvim-config ~/.config/nvim
 
 ### Step 3: Install Plugin Manager (Packer)
 
-To manage Neovim plugins, this configuration uses Packer. Install it with the following command:
+Install Packer for managing plugins:
 
 ```bash
 git clone --depth 1 https://github.com/wbthomason/packer.nvim \
@@ -39,17 +39,17 @@ git clone --depth 1 https://github.com/wbthomason/packer.nvim \
 ```
 ### Step 4: Install GitHub Copilot
 
-To use GitHub Copilot, clone its Vim plugin:
+Clone the GitHub Copilot plugin:
 
 ```bash
 git clone https://github.com/github/copilot.vim.git \
   ~/.config/nvim/pack/github/start/copilot.vim
 ```
-Then start Vim/Neovim and invoke `:Copilot setup`
+Then, start Neovim and run `:Copilot setup`.
 
-### Step 5: Install Java LSP (jdtls)
+### Step 5: Install Java LSP and Debugger
 
-If you are developing Java applications, you'll need to install the `jdtls` (Java Development Tools Language Server) manually:
+For Java development, install `jdtls` and the Java Debugger:
 
 ```bash
 mkdir -p ~/.local/share/nvim/lsp_servers/jdtls/plugins/
@@ -57,16 +57,20 @@ wget -O ~/.local/share/nvim/lsp_servers/jdtls/jdtls.tar.gz https://download.ecli
 cd ~/.local/share/nvim/lsp_servers/jdtls
 tar -xzvf jdtls.tar.gz
 rm jdtls.tar.gz
+
+git clone https://github.com/microsoft/java-debug ~/.local/share/nvim/lsp_servers/java-debug
+cd ~/.local/share/nvim/lsp_servers/java-debug/
+./mvnw clean install
 ```
 
 ### Step 6: Install Other Language Servers
 
-Make sure to install language servers for the languages you are working with. For example: 
+Install language servers for your preferred languages:
 
 ```bash
 yay -S python-pip clang lua-language-server bash-language-server clang pyright gopls rustup typescript-language-server rust-analyzer flake8 eslint prettier delve codelldb-bin --needed
 ```
-Alternatively you may use `npm` to install language servers: 
+Or use npm for some:
 
 ```bash
 npm install -g pyright bash-language-server typescript-language-server
@@ -74,7 +78,7 @@ npm install -g pyright bash-language-server typescript-language-server
 
 ### Step 7: Install Tokyonight Theme
 
-You should install the theme before launching `neovim` , or `:PackerSync` can't be executed.
+Install the Tokyonight theme:
 
 ```bash
 git clone https://github.com/folke/tokyonight.nvim \
@@ -83,7 +87,7 @@ git clone https://github.com/folke/tokyonight.nvim \
 
 ### Step 8: Install Python Formatter And Debugger
 
-You need to install [`black`](https://github.com/averms/black-nvim) to format Python codes, then install `debugpy`.
+Set up Python formatting with black and install debugpy:
 
 ```bash
 mkdir -p ~/.local/venv && cd ~/.local/venv
@@ -96,17 +100,9 @@ python -m venv debugpy
 debugpy/bin/python -m pip install debugpy
 ```
 
-### Step 9: Install Java Debugger
+### Step 9: Install Plugins and Sync Configuration
 
-```bash
-git clone https://github.com/microsoft/java-debug ~/.local/share/nvim/lsp_servers/java-debug
-cd .local/share/nvim/lsp_servers/java-debug/
-./mvnw clean install
-```
-
-### Step 10: Install Plugins and Sync Configuration
-
-Once everything is set up, open Neovim and run the following command to install all plugins:
+Open Neovim and run:
 
 ```bash
 :PackerSync
@@ -124,6 +120,9 @@ wget -O ~/.local/share/nvim/lsp_servers/jdtls/jdtls.tar.gz https://download.ecli
 cd ~/.local/share/nvim/lsp_servers/jdtls
 tar -xzvf jdtls.tar.gz
 rm jdtls.tar.gz
+git clone https://github.com/microsoft/java-debug ~/.local/share/nvim/lsp_servers/java-debug
+cd ~/.local/share/nvim/lsp_servers/java-debug/
+./mvnw clean install
 cd
 mkdir -p ~/.local/venv && cd ~/.local/venv
 python3 -m venv nvim
@@ -134,9 +133,6 @@ cd ~/.local/venv
 python -m venv debugpy
 debugpy/bin/python -m pip install debugpy
 cd
-git clone https://github.com/microsoft/java-debug ~/.local/share/nvim/lsp_servers/java-debug
-cd .local/share/nvim/lsp_servers/java-debug/
-./mvnw clean install
 yay -S python-pip clang lua-language-server bash-language-server clang pyright gopls rustup typescript-language-server rust-analyzer flake8 eslint prettier delve codelldb-bin --needed
 git clone https://github.com/folke/tokyonight.nvim ~/.local/share/nvim/site/pack/packer/start/tokyonight.nvim
 nvim
