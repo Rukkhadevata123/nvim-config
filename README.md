@@ -85,7 +85,7 @@ git clone https://github.com/folke/tokyonight.nvim \
   ~/.local/share/nvim/site/pack/packer/start/tokyonight.nvim
 ```
 
-### Step 8: Install Python Formatter And Debugger
+### Step 8: Install Python Formatter and Debugger
 
 Set up Python formatting with black and install debugpy:
 
