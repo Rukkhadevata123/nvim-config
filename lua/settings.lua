@@ -4,6 +4,10 @@ local opt = vim.opt
 -- 禁用兼容模式
 opt.compatible = false
 
+-- 启用拼写检查
+opt.spell = true                  -- 启用拼写检查
+opt.spelllang = {'en_us'}         -- 设置拼写检查语言
+
 -- 匹配、搜索和鼠标
 opt.showmatch = true              -- 匹配括号
 opt.ignorecase = true             -- 忽略大小写
