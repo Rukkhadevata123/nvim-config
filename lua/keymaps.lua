@@ -46,21 +46,20 @@ keymap('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
 keymap('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
 keymap('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
 
--- local dap = require('dap')
+local dap = require('dap')
 
--- -- 设置常见调试快捷键
--- keymap('n', '<F5>', dap.continue, { noremap = true, silent = true })
--- keymap('n', '<F10>', dap.step_over, { noremap = true, silent = true })
--- keymap('n', '<F11>', dap.step_into, { noremap = true, silent = true })
--- keymap('n', '<F12>', dap.step_out, { noremap = true, silent = true })
--- keymap('n', '<Leader>b', dap.toggle_breakpoint, { noremap = true, silent = true })
--- keymap('n', '<Leader>B', function() dap.set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, { noremap = true, silent = true })
--- keymap('n', '<Leader>lp', function() dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end, { noremap = true, silent = true })
--- keymap('n', '<Leader>dr', dap.repl.open, { noremap = true, silent = true })
--- keymap('n', '<Leader>dr', dap.repl.open, { noremap = true, silent = true })
--- keymap('n', '<Leader>dh', function() require('dap.ui.widgets').hover() end, { noremap = true, silent = true })
--- keymap('n', '<Leader>du', function() require('dapui').toggle() end, { noremap = true, silent = true })
--- keymap('n', '<Leader>B', function() dap.set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, { noremap = true, silent = true })
+-- 设置常见调试快捷键
+keymap('n', '<F5>', dap.continue, { noremap = true, silent = true })
+keymap('n', '<F10>', dap.step_over, { noremap = true, silent = true })
+keymap('n', '<F11>', dap.step_into, { noremap = true, silent = true })
+keymap('n', '<F12>', dap.step_out, { noremap = true, silent = true })
+keymap('n', '<Leader>b', dap.toggle_breakpoint, { noremap = true, silent = true })
+keymap('n', '<Leader>B', function() dap.set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, { noremap = true, silent = true })
+keymap('n', '<Leader>lp', function() dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end, { noremap = true, silent = true })
+keymap('n', '<Leader>dr', dap.repl.open, { noremap = true, silent = true })
+keymap('n', '<Leader>dh', function() require('dap.ui.widgets').hover() end, { noremap = true, silent = true })
+keymap('n', '<Leader>du', function() require('dapui').toggle() end, { noremap = true, silent = true })
+keymap('n', '<Leader>B', function() dap.set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, { noremap = true, silent = true })
 
 
 

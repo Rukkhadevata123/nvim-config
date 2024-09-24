@@ -1,4 +1,5 @@
 -- Java LSP 配置
+local dap = require('dap')
 local jdtls = require('jdtls')
 local home = os.getenv('HOME')
 local workspace_folder = home .. "/workspace/" .. vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
@@ -15,7 +16,7 @@ local config = {
     '--add-modules=ALL-SYSTEM',
     '--add-opens', 'java.base/java.util=ALL-UNNAMED',
     '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
-    '-jar', home .. '/.local/share/nvim/lsp_servers/jdtls/plugins/org.eclipse.equinox.launcher_1.6.900.v20240613-2009.jar',
+    '-jar', home .. "/.local/share/nvim/lsp_servers/jdtls/plugins/org.eclipse.equinox.launcher_1.6.900.v20240613-2009.jar",
     '-configuration', home .. '/.local/share/nvim/lsp_servers/jdtls/config_linux',
     '-data', workspace_folder
   },
@@ -24,7 +25,9 @@ local config = {
     java = {}
   },
   init_options = {
-    bundles = {}
+    bundles = {
+      vim.fn.glob(home .. "/.local/share/nvim/lsp_servers/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar", 1)
+    }
   },
     on_attach = function(client, bufnr)
     local bufopts = { noremap=true, silent=true, buffer=bufnr }
@@ -36,4 +39,8 @@ local config = {
   end,
 }
 
- jdtls.start_or_attach(config)
+-- require'jdtls'.test_class()
+-- require'jdtls'.test_nearest_method()
+-- require('jdtls.dap').setup_dap_main_class_configs()
+
+jdtls.start_or_attach(config)

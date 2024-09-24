@@ -64,7 +64,7 @@ rm jdtls.tar.gz
 Make sure to install language servers for the languages you are working with. For example: 
 
 ```bash
-sudo pacman -S python-pip clang lua-language-server bash-language-server clang pyright gopls rustup typescript-language-server rust-analyzer flake8 eslint prettier --needed
+yay -S python-pip clang lua-language-server bash-language-server clang pyright gopls rustup typescript-language-server rust-analyzer flake8 eslint prettier delve codelldb-bin --needed
 ```
 Alternatively you may use `npm` to install language servers: 
 
@@ -81,9 +81,9 @@ git clone https://github.com/folke/tokyonight.nvim \
   ~/.local/share/nvim/site/pack/packer/start/tokyonight.nvim
 ```
 
-### Step 8: Install Python Formatter
+### Step 8: Install Python Formatter And Debugger
 
-You need to install [`black`](https://github.com/averms/black-nvim) to format Python codes.
+You need to install [`black`](https://github.com/averms/black-nvim) to format Python codes, then install `debugpy`.
 
 ```bash
 mkdir -p ~/.local/venv && cd ~/.local/venv
@@ -91,9 +91,20 @@ python3 -m venv nvim
 cd nvim
 . ./bin/activate
 pip install pynvim black
+cd ~/.local/venv
+python -m venv debugpy
+debugpy/bin/python -m pip install debugpy
 ```
 
-### Step 9: Install Plugins and Sync Configuration
+### Step 9: Install Java Debugger
+
+```bash
+git clone https://github.com/microsoft/java-debug ~/.local/share/nvim/lsp_servers/java-debug
+cd .local/share/nvim/lsp_servers/java-debug/
+./mvnw clean install
+```
+
+### Step 10: Install Plugins and Sync Configuration
 
 Once everything is set up, open Neovim and run the following command to install all plugins:
 
@@ -119,8 +130,14 @@ python3 -m venv nvim
 cd nvim
 . ./bin/activate
 pip install pynvim black
+cd ~/.local/venv
+python -m venv debugpy
+debugpy/bin/python -m pip install debugpy
 cd
-sudo pacman -S python-pip clang lua-language-server bash-language-server clang pyright gopls rustup typescript-language-server rust-analyzer flake8 eslint prettier --needed
+git clone https://github.com/microsoft/java-debug ~/.local/share/nvim/lsp_servers/java-debug
+cd .local/share/nvim/lsp_servers/java-debug/
+./mvnw clean install
+yay -S python-pip clang lua-language-server bash-language-server clang pyright gopls rustup typescript-language-server rust-analyzer flake8 eslint prettier delve codelldb-bin --needed
 git clone https://github.com/folke/tokyonight.nvim ~/.local/share/nvim/site/pack/packer/start/tokyonight.nvim
 nvim
 ```

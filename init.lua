@@ -36,3 +36,6 @@ require('autopairs')
 
 -- 缓冲线
 require('_bufferline')
+
+-- 调试
+require('_dap')
