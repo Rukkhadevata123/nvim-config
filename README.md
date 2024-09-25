@@ -1,5 +1,7 @@
 # My Neovim Configuration
 
+> This repository also has a `zsh` config, you can use it as you wish.
+
 This repository contains my Neovim configuration for C++, Python, Go, Rust, TypeScript, Bash, and Java (with LSP support). Follow the instructions below to set it up.
 
 ## Prerequisites
