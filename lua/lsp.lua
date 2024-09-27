@@ -1,5 +1,6 @@
 -- LSP 配置
 local nvim_lsp = require('lspconfig')
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 -- 通用 on_attach 函数
 local on_attach = function(client, bufnr)
@@ -16,26 +17,45 @@ end
 -- 配置 clangd
 nvim_lsp.clangd.setup {
   on_attach = on_attach,
+  capabilities = capabilities,
 }
 
 -- 配置 pyright
 nvim_lsp.pyright.setup {
   on_attach = on_attach,
+  capabilities = capabilities,
 }
 
 -- 配置 gopls
 nvim_lsp.gopls.setup {
   on_attach = on_attach,
+  capabilities = capabilities,
 }
 
 -- 配置 TypeScript 语言服务器
 nvim_lsp.ts_ls.setup {
+  init_options = {
+    plugins = {
+      {
+        name = "@vue/typescript-plugin",
+        location = "/usr/local/lib/node_modules/@vue/typescript-plugin",
+        languages = {"javascript", "typescript", "vue"},
+      },
+    },
+  },
   on_attach = on_attach,
+  capabilities = capabilities,
+  filetypes = {
+    "javascript",
+    "typescript",
+    "vue",
+  },
 }
 
 -- 配置 Bash 语言服务器
 nvim_lsp.bashls.setup {
   on_attach = on_attach,
+  capabilities = capabilities,
 }
 
 -- 配置 Lua 语言服务器
@@ -64,4 +84,5 @@ nvim_lsp.lua_ls.setup {
     Lua = {}
   },
   on_attach = on_attach,
+  capabilities = capabilities,
 }

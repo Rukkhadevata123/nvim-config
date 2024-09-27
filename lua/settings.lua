@@ -55,6 +55,17 @@ vim.cmd("filetype plugin indent on")
 -- 设置配色方案
 vim.cmd[[colorscheme tokyonight-moon]]
 
+-- 设置自动更新
+-- vim.api.nvim_create_autocmd("QuitPre", {
+--   pattern = "*",
+--   callback = function()
+--     vim.defer_fn(function()
+--       require('packer').sync()
+--     end, 0)
+--   end,
+-- })
+
+
 -- 禁用背景高亮
 vim.cmd [[
   hi NonText ctermbg=NONE guibg=NONE

@@ -1,4 +1,5 @@
 local null_ls = require("null-ls")
+local eslint = require("eslint")
 local venv = os.getenv("VIRTUAL_ENV") or "~/.local/venv/nvim"
 
 null_ls.setup({
@@ -17,5 +18,25 @@ null_ls.setup({
     null_ls.builtins.diagnostics.flake8,           -- Python 诊断
     null_ls.builtins.diagnostics.eslint,           -- JavaScript 诊断
     null_ls.builtins.code_actions.gitsigns,        -- Git 符号操作
+  },
+})
+
+eslint.setup({
+  bin = 'eslint', -- or `eslint_d`
+  code_actions = {
+    enable = true,
+    apply_on_save = {
+      enable = true,
+      types = { "directive", "problem", "suggestion", "layout" },
+    },
+    disable_rule_comment = {
+      enable = true,
+      location = "separate_line", -- or `same_line`
+    },
+  },
+  diagnostics = {
+    enable = true,
+    report_unused_disable_directives = false,
+    run_on = "type", -- or `save`
   },
 })
