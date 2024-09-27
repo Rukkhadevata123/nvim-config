@@ -91,4 +91,7 @@ vim.g.vimtex_compiler_method = 'latexmk'
 -- Set the local leader key for VimTeX mappings. The default is usually "\", but here it's set to ",".
 vim.g.maplocalleader = " "
 
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 

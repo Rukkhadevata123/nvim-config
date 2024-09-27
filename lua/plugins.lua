@@ -22,7 +22,12 @@ require('packer').startup(function()
 
   -- 其他插件
   use 'nvim-lua/plenary.nvim' -- Lua 函数库
-  use 'kyazdani42/nvim-tree.lua' -- 文件浏览器
+  use {
+    'kyazdani42/nvim-tree.lua',
+    config = function()
+      require('nvim-tree').setup {}
+    end,
+  } -- 文件浏览器
   use 'mfussenegger/nvim-dap' -- Neovim 的调试插件
   use 'mfussenegger/nvim-jdtls' -- Java LSP 客户端
   use 'mfussenegger/nvim-dap-python' -- Python 调试支持
@@ -39,12 +44,6 @@ require('packer').startup(function()
   use "lervag/vimtex" -- TeX 支持
   use "CopilotC-Nvim/CopilotChat.nvim" -- Copilot Chat
   use "zbirenbaum/copilot.lua" -- Copilot
-  use {
-    "echasnovski/mini.animate",
-    config = function()
-      require("mini.animate").setup()
-    end
-  } -- 动画
   use {
     "zbirenbaum/copilot-cmp",
     after = { "copilot.lua" },
@@ -100,7 +99,10 @@ require('packer').startup(function()
   -- Lualine: 状态栏
   use {
     'nvim-lualine/lualine.nvim',
-    requires = { 'nvim-tree/nvim-web-devicons', opt = true }
+    requires = { 'nvim-tree/nvim-web-devicons', opt = true },
+    config = function()
+      require('lualine').setup{}
+    end, 
   }
 end)
 

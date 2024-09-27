@@ -16,14 +16,8 @@ require('_cmp')
 -- null-ls 配置
 require('_null-ls')
 
--- nvim-tree 配置
-require('nvim_tree')
-
 -- 快捷键绑定
 require('keymaps')
-
--- 状态栏
-require('_lualine')
 
 -- Git图标
 require('_gitsigns')

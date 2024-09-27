@@ -2,46 +2,33 @@ vim.opt.termguicolors = true
 
 require("bufferline").setup {
     options = {
-        -- 使用 nvim 内置 LSP 显示诊断信息
-        diagnostics = "nvim_lsp",
-        diagnostics_indicator = function(count, level, diagnostics_dict, context)
+        diagnostics = "nvim_lsp", -- Use built-in LSP for diagnostics
+        diagnostics_indicator = function(count, level)
             local icon = level:match("error") and " " or " "
             return " " .. icon .. count
         end,
-
-        -- 为 nvim-tree 让出左侧的空间，并加上文件管理器的标题
         offsets = {{
             filetype = "NvimTree",
             text = "File Explorer",
             highlight = "Directory",
             text_align = "left"
         }},
+        show_buffer_icons = true,        -- Show buffer file icons
+        show_buffer_close_icons = true,  -- Show buffer close icons
+        show_close_icon = false,         -- Hide close window icon
+        show_tab_indicators = true,      -- Show tab indicators
+        separator_style = "slant",       -- Separator style: "slant", "thick", "thin"
+        max_name_length = 18,            -- Max buffer name length
+        max_prefix_length = 15,          -- Max prefix length
+        tab_size = 18,                   -- Tab size
+        enforce_regular_tabs = true,     -- Enforce regular tabs
+        always_show_bufferline = true,   -- Always show bufferline
 
-        -- 通过缩略名展示文件路径，显示buffer编号
-        show_buffer_icons = true,        -- 显示缓冲区文件图标
-        show_buffer_close_icons = true,  -- 显示缓冲区关闭图标
-        show_close_icon = false,         -- 显示窗口关闭图标
-        show_tab_indicators = true,      -- 显示Tab页指示器
-        separator_style = "slant",       -- 设置分隔符样式，可选 "slant", "thick", "thin"
-
-        -- 最大显示的 buffer 数量
-        max_name_length = 18,
-        max_prefix_length = 15,
-        tab_size = 18,
-
-        -- 修改不同缓冲区状态的外观
-        enforce_regular_tabs = true,
-        always_show_bufferline = true,
-
-        -- 自定义键盘映射快捷键
         custom_filter = function(buf_number)
-            -- 过滤掉不可读的 buffer
-            if vim.bo[buf_number].filetype ~= "dashboard" then
-                return true
-            end
+            -- Filter out unreadable buffers
+            return vim.bo[buf_number].filetype ~= "dashboard"
         end,
 
-        -- 使用颜色来区分活跃的 buffer
         highlights = {
             fill = {
                 guifg = '#abb2bf',
@@ -58,7 +45,12 @@ require("bufferline").setup {
             },
             separator_selected = {
                 guifg = '#61afef',
+                guibg = '#282c34', -- Ensure background color matches
             },
-        }
+            separator = {
+                guifg = '#282c34', -- Ensure consistent colors
+                guibg = '#282c34',
+            },
+        },
     }
 }
