@@ -61,7 +61,7 @@ cd ~/.local/share/nvim/lsp_servers/java-debug/
 Install language servers for your preferred languages:
 
 ```bash
-yay -S luajit-tiktoken-bin python-pip lua-language-server bash-language-server clang pyright gopls rustup typescript-language-server rust-analyzer flake8 eslint prettier delve codelldb-bin zathura-cb zathura-djvu zathura-pdf-mupdf zathura-ps zathura --needed
+yay -S luajit-tiktoken-bin python-pip lua-language-server bash-language-server clang pyright gopls rustup typescript-language-server rust-analyzer flake8 eslint prettier delve codelldb-bin zathura-cb zathura-djvu zathura-pdf-mupdf zathura-ps zathura nodejs npm --needed
 ```
 Or use npm for some:
 
@@ -125,7 +125,7 @@ cd ~/.local/venv
 python -m venv debugpy
 debugpy/bin/python -m pip install debugpy
 cd
-yay -S luajit-tiktoken-bin python-pip lua-language-server bash-language-server clang pyright gopls rustup typescript-language-server rust-analyzer flake8 eslint prettier delve codelldb-bin zathura-cb zathura-djvu zathura-pdf-mupdf zathura-ps zathura --needed
+yay -S luajit-tiktoken-bin python-pip lua-language-server bash-language-server clang pyright gopls rustup typescript-language-server rust-analyzer flake8 eslint prettier delve codelldb-bin zathura-cb zathura-djvu zathura-pdf-mupdf zathura-ps zathura nodejs npm --needed
 git clone https://github.com/folke/tokyonight.nvim ~/.local/share/nvim/site/pack/packer/start/tokyonight.nvim
 nvim
 ```

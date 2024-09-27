@@ -42,3 +42,6 @@ require('_dap')
 
 --Copilot
 require('_copilot')
+
+-- Markdown预览
+require('markdown')
