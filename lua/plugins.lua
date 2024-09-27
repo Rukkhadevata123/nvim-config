@@ -2,6 +2,7 @@
 require('packer').startup(function()
   use 'wbthomason/packer.nvim' -- 插件管理器
   use 'nvim-treesitter/nvim-treesitter' -- 语法高亮和增量解析
+  use 'nvim-treesitter/nvim-treesitter-context' -- 语法上下文
   use 'neovim/nvim-lspconfig' -- LSP 配置
   use 'hrsh7th/nvim-cmp' -- 自动补全框架
   use 'hrsh7th/cmp-nvim-lsp' -- LSP 补全源
@@ -27,6 +28,12 @@ require('packer').startup(function()
   use "CopilotC-Nvim/CopilotChat.nvim" --Copilot
   use "zbirenbaum/copilot.lua" --Copilot
   use {
+    "echasnovski/mini.animate",
+    config = function()
+      require("mini.animate").setup()
+    end
+  } -- 动画
+  use {
     "zbirenbaum/copilot-cmp",
     after = { "copilot.lua" },
     config = function ()
@@ -34,6 +41,12 @@ require('packer').startup(function()
     end
   }
   use "onsails/lspkind-nvim" --LSP图标
+  use {
+    'rcarriga/nvim-notify', -- 通知 -- 设置状态栏
+    config = function()
+      vim.notify = require("notify")
+    end
+  }
   use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
   -- Telescope: 模糊搜索插件
   use {
@@ -41,6 +54,18 @@ require('packer').startup(function()
     tag = '0.1.8',
     requires = { {'nvim-lua/plenary.nvim'} }
   }
+  use {
+    "hedyhli/outline.nvim",
+    config = function()
+      -- Example mapping to toggle outline
+      vim.keymap.set("n", "<leader>o", "<cmd>Outline<CR>",
+        { desc = "Toggle Outline" })
+  
+      require("outline").setup {
+        -- Your setup opts here (leave empty to use defaults)
+      }
+    end,
+  } -- Outline: 大纲
   use({
     'MeanderingProgrammer/render-markdown.nvim',
     after = { 'nvim-treesitter' },
@@ -50,7 +75,7 @@ require('packer').startup(function()
     config = function()
         require('render-markdown').setup({render_modes = { 'n', 'v', 'i', 'c' }})
     end,
-})
+  })
 
   -- Lualine: 状态栏
   use {
