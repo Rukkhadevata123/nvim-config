@@ -39,3 +39,6 @@ require('_bufferline')
 
 -- 调试
 require('_dap')
+
+--Copilot
+require('_copilot')

@@ -28,13 +28,6 @@ nvim_lsp.gopls.setup {
   on_attach = on_attach,
 }
 
--- 配置 rust-analyzer
-require('rust-tools').setup {
-  server = {
-    on_attach = on_attach,
-  },
-}
-
 -- 配置 TypeScript 语言服务器
 nvim_lsp.ts_ls.setup {
   on_attach = on_attach,

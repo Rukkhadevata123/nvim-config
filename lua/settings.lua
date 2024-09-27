@@ -67,3 +67,17 @@ vim.cmd [[
   hi TabLine ctermbg=NONE ctermfg=NONE guibg=NONE
 ]]
 
+-- Viewer options: Configure the viewer method.
+vim.g.vimtex_view_method = 'zathura'
+
+-- Alternatively, configure a generic viewer interface.
+vim.g.vimtex_view_general_viewer = 'okular'
+vim.g.vimtex_view_general_options = '--unique file:@pdf\\#src:@line@tex'
+
+-- Set the compiler backend. Default is latexmk, but here it is set to latexrun.
+vim.g.vimtex_compiler_method = 'latexmk'
+
+-- Set the local leader key for VimTeX mappings. The default is usually "\", but here it's set to ",".
+vim.g.maplocalleader = " "
+
+

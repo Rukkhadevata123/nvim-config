@@ -8,7 +8,7 @@ This repository contains my Neovim configuration for C++, Python, Go, Rust, Type
 
 Ensure you have the following installed:
 
-- Neovim (version 0.5+)
+- Neovim (version 0.9.5+)
 - Git
 - wget (for Java LSP setup)
 - [Nerd Fonts](https://www.nerdfonts.com/) (for themes)
@@ -39,17 +39,8 @@ Install Packer for managing plugins:
 git clone --depth 1 https://github.com/wbthomason/packer.nvim \
   ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 ```
-### Step 4: Install GitHub Copilot
 
-Clone the GitHub Copilot plugin:
-
-```bash
-git clone https://github.com/github/copilot.vim.git \
-  ~/.config/nvim/pack/github/start/copilot.vim
-```
-Then, start Neovim and run `:Copilot setup`.
-
-### Step 5: Install Java LSP and Debugger
+### Step 4: Install Java LSP and Debugger
 
 For Java development, install `jdtls` and the Java Debugger:
 
@@ -65,12 +56,12 @@ cd ~/.local/share/nvim/lsp_servers/java-debug/
 ./mvnw clean install
 ```
 
-### Step 6: Install Other Language Servers
+### Step 5: Install Other Language Servers
 
 Install language servers for your preferred languages:
 
 ```bash
-yay -S python-pip lua-language-server bash-language-server clang pyright gopls rustup typescript-language-server rust-analyzer flake8 eslint prettier delve codelldb-bin --needed
+yay -S luajit-tiktoken-bin python-pip lua-language-server bash-language-server clang pyright gopls rustup typescript-language-server rust-analyzer flake8 eslint prettier delve codelldb-bin zathura-cb zathura-djvu zathura-pdf-mupdf zathura-ps zathura --needed
 ```
 Or use npm for some:
 
@@ -78,7 +69,7 @@ Or use npm for some:
 npm install -g pyright bash-language-server typescript-language-server
 ```
 
-### Step 7: Install Tokyonight Theme
+### Step 6: Install Tokyonight Theme
 
 Install the Tokyonight theme:
 
@@ -87,7 +78,7 @@ git clone https://github.com/folke/tokyonight.nvim \
   ~/.local/share/nvim/site/pack/packer/start/tokyonight.nvim
 ```
 
-### Step 8: Install Python Formatter and Debugger
+### Step 7: Install Python Formatter and Debugger
 
 Set up Python formatting with black and install debugpy:
 
@@ -102,7 +93,7 @@ python -m venv debugpy
 debugpy/bin/python -m pip install debugpy
 ```
 
-### Step 9: Install Plugins and Sync Configuration
+### Step 8: Install Plugins and Sync Configuration
 
 Open Neovim and run:
 
@@ -116,7 +107,6 @@ Open Neovim and run:
 mv ~/.config/nvim ~/.config/nvim_backup
 git clone https://github.com/Rukkhadevata123/nvim-config ~/.config/nvim
 git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-git clone https://github.com/github/copilot.vim.git ~/.config/nvim/pack/github/start/copilot.vim
 mkdir -p ~/.local/share/nvim/lsp_servers/jdtls/plugins/
 wget -O ~/.local/share/nvim/lsp_servers/jdtls/jdtls.tar.gz https://download.eclipse.org/jdtls/snapshots/jdt-language-server-latest.tar.gz
 cd ~/.local/share/nvim/lsp_servers/jdtls
@@ -135,7 +125,7 @@ cd ~/.local/venv
 python -m venv debugpy
 debugpy/bin/python -m pip install debugpy
 cd
-yay -S python-pip lua-language-server bash-language-server clang pyright gopls rustup typescript-language-server rust-analyzer flake8 eslint prettier delve codelldb-bin --needed
+yay -S luajit-tiktoken-bin python-pip lua-language-server bash-language-server clang pyright gopls rustup typescript-language-server rust-analyzer flake8 eslint prettier delve codelldb-bin zathura-cb zathura-djvu zathura-pdf-mupdf zathura-ps zathura --needed
 git clone https://github.com/folke/tokyonight.nvim ~/.local/share/nvim/site/pack/packer/start/tokyonight.nvim
 nvim
 ```
