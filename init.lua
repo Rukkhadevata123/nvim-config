@@ -39,3 +39,6 @@ require('_copilot')
 
 -- Markdown预览
 require('markdown')
+
+-- Toggleterm
+require('_toggleterm')

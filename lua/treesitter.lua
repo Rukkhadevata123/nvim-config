@@ -7,7 +7,7 @@ require'nvim-treesitter.configs'.setup {
       "r", "dart", "scala", "haskell", "elixir", "erlang",
       "markdown_inline", "query", "regex", "tsx", "vim", "dockerfile", 
       "git_config", "gitcommit", "git_rebase", "gitignore", "gitattributes",
-      "gomod", "gowork", "gosum", "json5"
+      "gomod", "gowork", "gosum", "json5", "c_sharp"
   },
 
   highlight = {

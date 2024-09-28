@@ -44,6 +44,26 @@ require('packer').startup(function()
   use "lervag/vimtex" -- TeX 支持
   use "CopilotC-Nvim/CopilotChat.nvim" -- Copilot Chat
   use "zbirenbaum/copilot.lua" -- Copilot
+  use "RRethy/vim-illuminate" -- 变量高亮
+  use {"akinsho/toggleterm.nvim", tag = '*', config = function()
+    require("toggleterm").setup()
+  end} -- 多窗口
+  use {
+    "lukas-reineke/indent-blankline.nvim",
+    config = function()
+      require("ibl").setup()
+    end,
+  } -- 缩进线
+  use {
+    'goolord/alpha-nvim',
+    requires = {
+        'echasnovski/mini.icons',
+        'nvim-lua/plenary.nvim'
+    },
+    config = function ()
+        require'alpha'.setup(require'alpha.themes.dashboard'.config)
+    end
+  } 
   use {
     "zbirenbaum/copilot-cmp",
     after = { "copilot.lua" },
