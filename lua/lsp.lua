@@ -1,6 +1,6 @@
 -- LSP 配置
 local nvim_lsp = require('lspconfig')
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
+local default_capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 -- 通用 on_attach 函数
 local on_attach = function(client, bufnr)
@@ -14,22 +14,26 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
 end
 
--- 配置 clangd
+-- 配置 clangd with UTF-16 encoding
+local clangd_capabilities = vim.tbl_deep_extend("force", default_capabilities, {
+  offsetEncoding = { "utf-16" }
+})
+
 nvim_lsp.clangd.setup {
   on_attach = on_attach,
-  capabilities = capabilities,
+  capabilities = clangd_capabilities, -- Specific capabilities for clangd with UTF-16
 }
 
 -- 配置 pyright
 nvim_lsp.pyright.setup {
   on_attach = on_attach,
-  capabilities = capabilities,
+  capabilities = default_capabilities, -- Default UTF-8 encoding
 }
 
 -- 配置 gopls
 nvim_lsp.gopls.setup {
   on_attach = on_attach,
-  capabilities = capabilities,
+  capabilities = default_capabilities, -- Default UTF-8 encoding
 }
 
 -- 配置 TypeScript 语言服务器
@@ -44,7 +48,7 @@ nvim_lsp.ts_ls.setup {
     },
   },
   on_attach = on_attach,
-  capabilities = capabilities,
+  capabilities = default_capabilities, -- Default UTF-8 encoding
   filetypes = {
     "javascript",
     "typescript",
@@ -55,7 +59,7 @@ nvim_lsp.ts_ls.setup {
 -- 配置 Bash 语言服务器
 nvim_lsp.bashls.setup {
   on_attach = on_attach,
-  capabilities = capabilities,
+  capabilities = default_capabilities, -- Default UTF-8 encoding
 }
 
 -- 配置 Lua 语言服务器
@@ -84,5 +88,5 @@ nvim_lsp.lua_ls.setup {
     Lua = {}
   },
   on_attach = on_attach,
-  capabilities = capabilities,
+  capabilities = default_capabilities, -- Default UTF-8 encoding
 }
