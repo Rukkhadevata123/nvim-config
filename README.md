@@ -66,7 +66,7 @@ yay -S luajit-tiktoken-bin python-pip lua-language-server bash-language-server c
 Or use npm for some:
 
 ```bash
-npm install -g pyright bash-language-server typescript-language-server
+sudo npm install -g pyright bash-language-server typescript-language-server
 ```
 
 ### Step 6: Install Tokyonight Theme

@@ -28,6 +28,8 @@ HISTFILE=~/.zsh_history
 HISTSIZE=1000
 SAVEHIST=2000
 
+EDITOR=nvim
+
 TIMEFMT=$'\nreal\t%E\nuser\t%U\nsys\t%S\ncpu\t%P'
 
 # Case-insensitive tab completion (match lower and upper case)
