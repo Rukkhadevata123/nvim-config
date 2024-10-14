@@ -148,11 +148,9 @@ setopt hist_verify            # show command with history expansion to user befo
 # Enable emacs key bindings
 bindkey -e
 
-# Key bindings using raw escape sequences
+# Essential key bindings
 bindkey '^[[7~' beginning-of-line                  # Home key
 bindkey '^[[8~' end-of-line                        # End key
-bindkey '^[[H' beginning-of-line                   # Home key (alternative)
-bindkey '^[[F' end-of-line                         # End key (alternative)
 bindkey '^[[2~' overwrite-mode                     # Insert key
 bindkey '^[[3~' delete-char                        # Delete key
 bindkey '^[[C' forward-char                        # Right arrow key
@@ -161,33 +159,22 @@ bindkey '^[[5~' history-beginning-search-backward  # Page Up key
 bindkey '^[[6~' history-beginning-search-forward   # Page Down key
 bindkey '^[[1;5C' forward-word                     # Ctrl + Right arrow (forward word)
 bindkey '^[[1;5D' backward-word                    # Ctrl + Left arrow (backward word)
-bindkey '^[[Z' undo                               # Shift + Tab undo last action
 
-# Bind Ctrl+Backspace to delete the previous word
+# Simplified undo and word deletion
+bindkey '^[[Z' undo                                # Shift + Tab undo
 bindkey '^H' backward-kill-word                    # Ctrl + Backspace
-
-# Bind Ctrl+U to delete the line before the cursor
 bindkey '^U' backward-kill-line                    # Ctrl + U
-
-# Ctrl + Delete (Supr) to kill the word
 bindkey '^[[3;5~' kill-word                        # Ctrl + Delete
 
-# Undo action with Shift + Tab
-bindkey '^[[Z' undo                                # Shift + Tab undo
-
-# Configure up/down keys for history substring search
+# History search with up/down keys
 bindkey '^[[A' history-substring-search-up         # Up arrow
 bindkey '^[[B' history-substring-search-down       # Down arrow
 
-# Magic space: perform history expansion on space
-bindkey ' ' magic-space                            # Space bar for history expansion
-
-# Define keys using terminfo variables for portability
+# Use terminfo for portability (optional, for special cases)
 typeset -g -A key
 key[Home]="${terminfo[khome]}"
 key[End]="${terminfo[kend]}"
 key[Insert]="${terminfo[kich1]}"
-key[Backspace]="${terminfo[kbs]}"
 key[Delete]="${terminfo[kdch1]}"
 key[Up]="${terminfo[kcuu1]}"
 key[Down]="${terminfo[kcud1]}"
@@ -195,46 +182,6 @@ key[Left]="${terminfo[kcub1]}"
 key[Right]="${terminfo[kcuf1]}"
 key[PageUp]="${terminfo[kpp]}"
 key[PageDown]="${terminfo[knp]}"
-key[Shift-Tab]="${terminfo[kcbt]}"
-
-# Bind keys according to the terminfo values
-[[ -n "${key[Home]}"      ]] && bindkey -- "${key[Home]}"       beginning-of-line
-[[ -n "${key[End]}"       ]] && bindkey -- "${key[End]}"        end-of-line
-[[ -n "${key[Insert]}"    ]] && bindkey -- "${key[Insert]}"     overwrite-mode
-[[ -n "${key[Backspace]}" ]] && bindkey -- "${key[Backspace]}"  backward-delete-char
-[[ -n "${key[Delete]}"    ]] && bindkey -- "${key[Delete]}"     delete-char
-[[ -n "${key[Up]}"        ]] && bindkey -- "${key[Up]}"         up-line-or-history
-[[ -n "${key[Down]}"      ]] && bindkey -- "${key[Down]}"       down-line-or-history
-[[ -n "${key[Left]}"      ]] && bindkey -- "${key[Left]}"       backward-char
-[[ -n "${key[Right]}"     ]] && bindkey -- "${key[Right]}"      forward-char
-[[ -n "${key[PageUp]}"    ]] && bindkey -- "${key[PageUp]}"     beginning-of-buffer-or-history
-[[ -n "${key[PageDown]}"  ]] && bindkey -- "${key[PageDown]}"   end-of-buffer-or-history
-[[ -n "${key[Shift-Tab]}" ]] && bindkey -- "${key[Shift-Tab]}"  reverse-menu-complete
-
-# Application mode handling for terminfo keys
-if (( ${+terminfo[smkx]} && ${+terminfo[rmkx]} )); then
-    autoload -Uz add-zle-hook-widget
-    function zle_application_mode_start { echoti smkx }  # Enter application mode
-    function zle_application_mode_stop { echoti rmkx }   # Exit application mode
-    add-zle-hook-widget -Uz zle-line-init zle_application_mode_start
-    add-zle-hook-widget -Uz zle-line-finish zle_application_mode_stop
-fi
-
-# Up/down key bindings with search capabilities
-autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
-zle -N up-line-or-beginning-search
-zle -N down-line-or-beginning-search
-
-[[ -n "${key[Up]}"   ]] && bindkey -- "${key[Up]}"   up-line-or-beginning-search
-[[ -n "${key[Down]}" ]] && bindkey -- "${key[Down]}" down-line-or-beginning-search
-
-# Control + Left/Right bindings for word navigation
-key[Control-Left]="${terminfo[kLFT5]}"
-key[Control-Right]="${terminfo[kRIT5]}"
-
-[[ -n "${key[Control-Left]}"  ]] && bindkey -- "${key[Control-Left]}"  backward-word
-[[ -n "${key[Control-Right]}" ]] && bindkey -- "${key[Control-Right]}" forward-word
-
 
 function command_not_found_handler {
     local purple='\e[1;35m' bright='\e[0;1m' green='\e[1;32m' reset='\e[0m'
@@ -266,7 +213,7 @@ function command_not_found_handler {
 # Use lesspipe for better handling of non-text files
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-# Set up a fancy prompt with optional color support based on terminal type
+# Set up color prompt based on terminal type
 case "$TERM" in
     xterm-color|*-256color) color_prompt=yes ;;
 esac
@@ -274,93 +221,31 @@ force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-        color_prompt=yes # Color support is available
+        color_prompt=yes # Enable color if tput supports it
     else
         color_prompt=
     fi
 fi
 
-# Function to execute before displaying the prompt
-precmd() {
-    # Print previously configured terminal title
-    print -Pnr -- "$TERM_TITLE"
-
-    # Print a new line before the prompt if configured
-    if [ "$NEWLINE_BEFORE_PROMPT" = yes ]; then
-        if [ -z "$_NEW_LINE_BEFORE_PROMPT" ]; then
-            _NEW_LINE_BEFORE_PROMPT=1
-        else
-            print ""
-        fi
-    fi
-}
-
-# Update terminal title before executing a command
-mzc_termsupport_precmd() {
-    [[ "${DISABLE_AUTO_TITLE:-}" == true ]] && return
-    title $ZSH_THEME_TERM_TAB_TITLE_IDLE $ZSH_THEME_TERM_TITLE_IDLE
-}
-
-# Function to run before executing any command
-mzc_termsupport_preexec() {
-    [[ "${DISABLE_AUTO_TITLE:-}" == true ]] && return
-
-    emulate -L zsh
-
-    # Split command into arguments
-    local -a cmdargs
-    cmdargs=("${(z)2}")
-
-    # Handle foreground job commands
-    if [[ "${cmdargs[1]}" = fg ]]; then
-        local job_id jobspec="${cmdargs[2]#%}"
-        case "$jobspec" in
-            <->) job_id=${jobspec} ;;           # Use specified job number
-            ""|%|+) job_id=${(k)jobstates[(r)*:+:*]} ;; # Current job
-            -) job_id=${(k)jobstates[(r)*:-:*]} ;;        # Previous job
-            [?]*) job_id=${(k)jobtexts[(r)*${(Q)jobspec}*]} ;; # Match job command
-            *) job_id=${(k)jobtexts[(r)${(Q)jobspec}*]} ;;  # Start of command
-        esac
-
-        # Override preexec function arguments with job command
-        if [[ -n "${jobtexts[$job_id]}" ]]; then
-            1="${jobtexts[$job_id]}"
-            2="${jobtexts[$job_id]}"
-        fi
-    fi
-
-    # Extract command name and line for terminal title
-    local CMD=${1[(wr)^(*=*|sudo|ssh|mosh|rake|-*)]:gs/%/%%}
-    local LINE="${2:gs/%/%%}"
-
-    title '$CMD' '%100>...>$LINE%<<'
-}
-
-# Add hooks for preexec and precmd
-autoload -U add-zsh-hook
-add-zsh-hook precmd mzc_termsupport_precmd
-add-zsh-hook preexec mzc_termsupport_preexec
-
-# Function to set the terminal title
+# Function to set terminal title and tab name
 title() {
     emulate -L zsh
     setopt prompt_subst
 
     [[ "$EMACS" == *term* ]] && return
 
-    # Use the first argument if the second is unset
     : ${2=$1}
 
     case "$TERM" in
         xterm*|putty*|rxvt*|konsole*|mlterm*|alacritty|kitty|wezterm|st*)
-            print -Pn "\e]2;${2:q}\a" # Set window name
-            print -Pn "\e]1;${1:q}\a" # Set tab name
+            print -Pn "\e]2;${2:q}\a"  # Set window name
+            print -Pn "\e]1;${1:q}\a"  # Set tab name
             ;;
         screen*|tmux*)
-            print -Pn "\ek${1:q}\e\\" # Set screen hardstatus
+            print -Pn "\ek${1:q}\e\\"  # Set screen hardstatus
             ;;
         *)
-            # Try to set the title using terminfo
+            # Set terminal title using terminfo
             if [[ -n "$terminfo[fsl]" ]] && [[ -n "$terminfo[tsl]" ]]; then
                 echoti tsl
                 print -Pn "$1"
@@ -370,10 +255,44 @@ title() {
     esac
 }
 
-# Load required module for language info
-zmodload zsh/langinfo
+# Update terminal title before displaying prompt
+mzc_termsupport_precmd() {
+    [[ "${DISABLE_AUTO_TITLE:-}" == true ]] && return
+    title $ZSH_THEME_TERM_TAB_TITLE_IDLE $ZSH_THEME_TERM_TITLE_IDLE
+}
 
-# Function to URL-encode a string
+# Update terminal title before executing a command
+mzc_termsupport_preexec() {
+    [[ "${DISABLE_AUTO_TITLE:-}" == true ]] && return
+
+    emulate -L zsh
+    local -a cmdargs
+    cmdargs=("${(z)2}")
+
+    # Handle foreground job commands
+    if [[ "${cmdargs[1]}" = fg ]]; then
+        local job_id jobspec="${cmdargs[2]#%}"
+        case "$jobspec" in
+            <->) job_id=${jobspec} ;;           # Use specified job number
+            ""|%|+) job_id=${(k)jobstates[(r)*:+:*]} ;;  # Current job
+            -) job_id=${(k)jobstates[(r)*:-:*]} ;;  # Previous job
+            [?]*) job_id=${(k)jobtexts[(r)*${(Q)jobspec}*]} ;;  # Match job command
+            *) job_id=${(k)jobtexts[(r)${(Q)jobspec}*]} ;;  # Start of command
+        esac
+
+        if [[ -n "${jobtexts[$job_id]}" ]]; then
+            1="${jobtexts[$job_id]}"
+            2="${jobtexts[$job_id]}"
+        fi
+    fi
+
+    local CMD=${1[(wr)^(*=*|sudo|ssh|mosh|rake|-*)]:gs/%/%%}
+    local LINE="${2:gs/%/%%}"
+
+    title '$CMD' '%100>...>$LINE%<<'
+}
+
+# URL encode function
 zsh_urlencode() {
     emulate -L zsh
     local -a opts
@@ -385,7 +304,6 @@ zsh_urlencode() {
     if [[ -z $opts[(r)-P] ]]; then spaces_as_plus=1; fi
     local str="$in_str"
 
-    # Convert string to UTF-8 if necessary
     local encoding=$langinfo[CODESET]
     local safe_encodings=(UTF-8 utf8 US-ASCII)
     if [[ -z ${safe_encodings[(r)$encoding]} ]]; then
@@ -395,7 +313,6 @@ zsh_urlencode() {
         }
     fi
 
-    # URL encode the string
     local reserved=';/?:@&=+$,'
     local mark='_.!~*''()-'
     local dont_escape="[A-Za-z0-9"
@@ -423,17 +340,19 @@ zsh_urlencode() {
     echo -E "$url_str"
 }
 
-# Function to set the terminal to display the current working directory
+# Function to update terminal CWD in terminal title
 mzc_termsupport_cwd() {
     local URL_HOST URL_PATH
     URL_HOST="$(zsh_urlencode -P $HOST)" || return 1
     URL_PATH="$(zsh_urlencode -P $PWD)" || return 1
 
-    # Set the current host and path in the terminal
     printf "\e]7;%s\a" "file://${URL_HOST}${URL_PATH}"
 }
 
-# Use a precmd hook for updating the current working directory in the terminal title
+# Add hooks for preexec and precmd
+autoload -U add-zsh-hook
+add-zsh-hook precmd mzc_termsupport_precmd
+add-zsh-hook preexec mzc_termsupport_preexec
 add-zsh-hook precmd mzc_termsupport_cwd
 
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
