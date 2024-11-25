@@ -1,3 +1,5 @@
+local config = {}
+
 require("copilot").setup({
   suggestion = { enabled = false },
   panel = { enabled = false },
@@ -161,4 +163,4 @@ vim.keymap.set('n', '<leader>ccp', function()
 end, { desc = "CopilotChat - Prompt actions" })
 
 -- Register CopilotChat source with nvim-cmp
-require("CopilotChat.integrations.cmp").setup()
+config.chat_autocomplete = true
