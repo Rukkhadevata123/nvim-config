@@ -87,10 +87,10 @@ require("CopilotChat").setup {
     show_diff = {
       normal = 'gd',  -- Show differences
     },
-    show_system_prompt = {
+    show_info = {
       normal = 'gp',  -- Show system prompt
     },
-    show_user_selection = {
+    show_context = {
       normal = 'gs',  -- Show user selection
     },
   },
