@@ -16,7 +16,7 @@ local config = {
     '--add-modules=ALL-SYSTEM',
     '--add-opens', 'java.base/java.util=ALL-UNNAMED',
     '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
-    '-jar', home .. "/.local/share/nvim/lsp_servers/jdtls/plugins/org.eclipse.equinox.launcher_1.6.900.v20240613-2009.jar",
+    '-jar', home .. "/.local/share/nvim/lsp_servers/jdtls/plugins/org.eclipse.equinox.launcher_1.7.0.v20250519-0528.jar",
     '-configuration', home .. '/.local/share/nvim/lsp_servers/jdtls/config_linux',
     '-data', workspace_folder
   },
