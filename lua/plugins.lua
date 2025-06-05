@@ -17,7 +17,7 @@ require('packer').startup(function()
   -- use 'dcampos/nvim-snippy' -- Snippy 代码片段引擎 (可以启用)
 
   -- 代码格式化和诊断
-  use 'jose-elias-alvarez/null-ls.nvim' -- 代码格式化和诊断
+  use 'nvimtools/none-ls.nvim' -- 代码格式化和诊断
   use 'MunifTanjim/eslint.nvim' -- ESLint 支持
 
   -- 其他插件
