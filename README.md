@@ -81,11 +81,7 @@ git clone https://github.com/folke/tokyonight.nvim \
 Set up Python formatting with black and install debugpy:
 
 ```bash
-mkdir -p ~/.local/venv && cd ~/.local/venv
-python3 -m venv nvim
-cd nvim
-. ./bin/activate
-pip install pynvim black
+sudo pacman -S python-pylint python-black
 cd ~/.local/venv
 python -m venv debugpy
 debugpy/bin/python -m pip install debugpy
