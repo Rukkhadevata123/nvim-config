@@ -88,6 +88,16 @@ require('packer').startup(function()
     ft = { "markdown" },
   })
 
+  -- Error Lens: 错误高亮
+  use {
+    'chikko80/error-lens.nvim',
+    requires = { 'nvim-telescope/telescope.nvim' }
+  }
+
+  require("error-lens").setup(client, {
+    -- your options go here
+  })
+
   -- Telescope: 模糊搜索插件
   use {
     'nvim-telescope/telescope.nvim',
