@@ -121,6 +121,34 @@ nvim
 | Normal | `[d` | `vim.diagnostic.goto_prev` | Previous diagnostic |
 | Normal | `]d` | `vim.diagnostic.goto_next` | Next diagnostic |
 
+### Rust (rustaceanvim)
+
+| Mode | Key | Action | Description |
+|------|-----|--------|-------------|
+| Normal (Rust) | `K` | `hover actions` | Show hover with actions |
+| Normal (Rust) | `<leader>ra` | `codeAction` | Rust code actions (grouped) |
+| Normal (Rust) | `<leader>rr` | `runnables` | Show runnable targets |
+| Normal (Rust) | `<leader>rt` | `testables` | Show testable targets |
+| Normal (Rust) | `<leader>rd` | `debuggables` | Show debuggable targets |
+| Normal (Rust) | `<leader>re` | `explainError` | Explain Rust error |
+| Normal (Rust) | `<leader>rD` | `renderDiagnostic` | Render diagnostic |
+| Normal (Rust) | `<leader>rm` | `expandMacro` | Expand macro |
+| Normal (Rust) | `<leader>rc` | `openCargo` | Open Cargo.toml |
+| Normal (Rust) | `<leader>rp` | `parentModule` | Go to parent module |
+| Normal (Rust) | `<leader>rj` | `joinLines` | Join lines smartly |
+| Normal (Rust) | `<leader>rs` | `ssr` | Structural search replace |
+| Normal (Rust) | `<leader>rh` | `view hir` | View HIR |
+| Normal (Rust) | `<leader>rM` | `view mir` | View MIR |
+| Normal (Rust) | `<leader>rg` | `crateGraph` | Show crate graph |
+| Normal (Rust) | `<leader>rS` | `syntaxTree` | Show syntax tree |
+| Normal (Rust) | `<leader>rf` | `flyCheck` | Run fly check |
+| Normal (Rust) | `<leader>ro` | `openDocs` | Open docs.rs |
+| Normal (Rust) | `<leader>rmu` | `moveItem up` | Move item up |
+| Normal (Rust) | `<leader>rmd` | `moveItem down` | Move item down |
+| Normal (Rust) | `<leader>rR` | Re-run last runnable | Repeat last runnable |
+| Normal (Rust) | `<leader>rT` | Re-run last testable | Repeat last testable |
+| Normal (Rust) | `<leader>rDD` | Re-run last debuggable | Repeat last debuggable |
+
 ### Git Signs
 
 | Mode | Key | Action | Description |
